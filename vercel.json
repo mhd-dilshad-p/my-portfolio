@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd portfolio_flutter && flutter build web --release",
-  "outputDirectory": "portfolio_flutter/build/web",
-  "installCommand": "cd portfolio_flutter && flutter pub get"
+  "installCommand": "if [ ! -d \"flutter\" ]; then git clone https://github.com/flutter/flutter.git -b stable; fi && export PATH=\"$PWD/flutter/bin:$PATH\" && flutter precache && cd portfolio_flutter && flutter pub get",
+  "buildCommand": "export PATH=\"$PWD/flutter/bin:$PATH\" && cd portfolio_flutter && flutter build web --release",
+  "outputDirectory": "portfolio_flutter/build/web"
 }
