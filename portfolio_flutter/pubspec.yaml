@@ -41,7 +41,6 @@ dependencies:
   visibility_detector: ^0.4.0
   lottie: ^3.1.2
   flutter_svg: ^2.0.10+1
-  video_player: ^2.8.2
 
 
 dev_dependencies:
@@ -91,6 +90,7 @@ flutter:
     - assets/images/Social work.jpeg
     - assets/icons/android.png
     - assets/videos/andoridlogovideo.mov
+    - assets/cv/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
