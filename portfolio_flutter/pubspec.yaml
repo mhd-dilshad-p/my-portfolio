@@ -38,6 +38,11 @@ dependencies:
   url_launcher: ^6.3.0
   font_awesome_flutter: ^10.7.0
   flutter_animate: ^4.5.0
+  visibility_detector: ^0.4.0
+  lottie: ^3.1.2
+  flutter_svg: ^2.0.10+1
+  video_player: ^2.8.2
+
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +73,25 @@ flutter:
     - assets/images/adam_logo.png
     - assets/images/nadodi_logo.jpg
     - assets/images/profile_photo.jpg
+    - assets/images/ALIZO-removebg.png
+    - assets/icons/apple-logo.png
+    - assets/icons/apple.png
+    - assets/icons/html.png
+    - assets/icons/
+    - assets/icons/flutter.png
+    - assets/icons/dart.png
+    - assets/icons/firebase.png
+    - assets/icons/supabase.png
+    - assets/icons/GitHub.png
+    - assets/icons/email.json
+    - assets/icons/call.json
+    - assets/icons/linkedin.json
+    - assets/images/flutterdeveloper.jpeg
+    - assets/images/humanities.jpeg
+    - assets/images/Social work.jpeg
+    - assets/icons/android.png
+    - assets/videos/andoridlogovideo.mov
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
