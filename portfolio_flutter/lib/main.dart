@@ -1902,88 +1902,12 @@ class HeroSection extends StatelessWidget {
                       ],
                     ).animate().fadeIn(duration: 700.ms, delay: 1200.ms),
                     const SizedBox(height: 30),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     _SocialBtn(
-                    //       icon: FontAwesomeIcons.github,
-                    //       url: 'https://github.com/mhd-dilshad-p',
-                    //     ),
-                    //     const SizedBox(width: 14),
-                    //     _SocialBtn(
-                    //       icon: FontAwesomeIcons.linkedinIn,
-                    //       url: 'https://linkedin.com/in/mhd-dilshad-p',
-                    //     ),
-                    //     const SizedBox(width: 14),
-                    //     _SocialBtn(
-                    //       icon: FontAwesomeIcons.envelope,
-                    //       url: 'mailto:dilshadgb750@gmail.com',
-                    //     ),
-                    //   ],
-                    // ).animate().fadeIn(duration: 700.ms, delay: 1400.ms),
                     const SizedBox(height: 36),
                     Wrap(
                       alignment: WrapAlignment.center,
                       spacing: 14,
                       runSpacing: 12,
                       children: [
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/flutter.png',
-                        //   icon: FontAwesomeIcons.code,
-                        //   label: 'Flutter',
-                        //   color: const Color(0xFF54C5F8),
-                        //   delay: 1500.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/dart.png',
-                        //   icon: FontAwesomeIcons.dartLang,
-                        //   label: 'Dart',
-                        //   color: const Color(0xFF00B4AB),
-                        //   delay: 1570.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/firebase.png',
-                        //   icon: FontAwesomeIcons.fire,
-                        //   label: 'Firebase',
-                        //   color: const Color(0xFFFFCA28),
-                        //   delay: 1640.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/GitHub.png',
-                        //   icon: FontAwesomeIcons.github,
-                        //   label: 'GitHub',
-                        //   color: AppColors.text0,
-                        //   delay: 1710.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/android.png',
-                        //   icon: FontAwesomeIcons.android,
-                        //   label: 'Android',
-                        //   color: const Color(0xFF3DDC84),
-                        //   delay: 1780.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/apple.png',
-                        //   icon: FontAwesomeIcons.apple,
-                        //   label: 'Apple',
-                        //   color: const Color.fromARGB(255, 255, 255, 255),
-
-                        //   delay: 1850.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/supabase.png',
-                        //   icon: FontAwesomeIcons.code,
-                        //   label: 'Supabase',
-                        //   color: const Color.fromARGB(255, 19, 248, 2),
-                        //   delay: 1920.ms,
-                        // ),
-                        // _TechBadge(
-                        //   assetPath: 'assets/icons/html5.png',
-                        //   icon: FontAwesomeIcons.html5,
-                        //   label: 'Web',
-                        //   color: const Color.fromARGB(255, 234, 21, 1),
-                        //   delay: 1710.ms,
-                        // ),
                       ],
                     ),
                     const SizedBox(height: 32),
