@@ -435,15 +435,24 @@ class _ConstellationPainter extends CustomPainter {
 class _ProgressBar extends StatelessWidget {
   final ScrollController scroll;
   const _ProgressBar({required this.scroll});
+
+  double _getProgress() {
+    try {
+      if (scroll.hasClients && scroll.position.maxScrollExtent > 0) {
+        return (scroll.offset / scroll.position.maxScrollExtent).clamp(0.0, 1.0);
+      }
+    } catch (_) {
+      // position not yet attached
+    }
+    return 0.0;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: Stream.periodic(const Duration(milliseconds: 40)),
-      builder: (_, __) {
-        double p = 0;
-        if (scroll.hasClients && scroll.position.maxScrollExtent > 0) {
-          p = (scroll.offset / scroll.position.maxScrollExtent).clamp(0, 1);
-        }
+    return AnimatedBuilder(
+      animation: scroll,
+      builder: (context, _) {
+        final double p = _getProgress();
         return SizedBox(
           height: 3,
           width: double.infinity,
@@ -737,7 +746,7 @@ class _MobileDrawer extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'MD.',
+                  'MD',
                   style: GoogleFonts.spaceMono(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -1723,7 +1732,7 @@ class HeroSection extends StatelessWidget {
       color: AppColors.bg0,
       child: Stack(
         children: [
-          const _ConstellationBg(),
+          const Positioned.fill(child: _ConstellationBg()),
           // Orbs (reduced opacity)
           Positioned(top: -160, right: -90,
             child: _Orb(size: 520, color: AppColors.violet, delay: 0)),
