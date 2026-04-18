@@ -90,7 +90,18 @@ flutter:
     - assets/images/Social work.jpeg
     - assets/icons/android.png
     - assets/cv/
-
+    - assets/cv/mohammed_dilshad_p.pdf
+    - assets/images/screen2image.png
+    - assets/images/fuel_dost_logo.png
+    - assets/screenshots/FuelDost/expenceandhistory.jpeg
+    - assets/screenshots/FuelDost/home1.jpeg
+    - assets/screenshots/FuelDost/home2.jpeg
+    - assets/screenshots/FuelDost/insights.jpeg
+    - assets/screenshots/Nadodi/flightbooking.jpeg
+    - assets/screenshots/Nadodi/nadodihome.jpeg
+    - assets/screenshots/Nadodi/splashnadodi.jpeg
+    - assets/screenshots/Alizo/homeincustomer.jpeg
+    - assets/screenshots/Alizo/splash.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

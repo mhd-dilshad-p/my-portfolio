@@ -633,9 +633,7 @@ class _DownloadCVNavButtonState extends State<_DownloadCVNavButton> {
   bool _hov = false;
 
   void _downloadCV() {
-    html.AnchorElement(href: 'assets/cv/Mohammed_Dilshad_P.pdf')
-      ..setAttribute('download', 'Mohammed_Dilshad_P.pdf')
-      ..click();
+    html.window.open('https://drive.google.com/file/d/1ed2qQwzo-gh5DdFYGTWfvf5F4B9WAqLB/view?usp=sharing', '_blank');
   }
 
   @override
@@ -2263,12 +2261,12 @@ class _HeroPremiumAvatarState extends State<_HeroPremiumAvatar>
                 ),
               ),
 
-              // Floating stat badge: bottom-left — "1+ Years"
+              // Floating stat badge: bottom-left — "1 Years"
               Positioned(
                 bottom: widget.isMobile ? -12 : -16,
                 left: widget.isMobile ? -12 : -20,
                 child: _FloatingStatChip(
-                  label: '1+ Years',
+                  label: '1 Years',
                   icon: FontAwesomeIcons.clock,
                   floatOffset: 0.8,
                 ),
@@ -2478,7 +2476,7 @@ class _AboutImageCardState extends State<_AboutImageCard> {
                 fit: StackFit.expand,
                 children: [
                   Image.asset(
-                    'assets/images/long_logo.jpeg',
+                    'assets/images/screen2image.png',
                     fit: BoxFit.cover,
                     alignment: Alignment.topCenter,
                   ),
@@ -2563,7 +2561,7 @@ class _AboutContent extends StatelessWidget {
             colors: [AppColors.text0, AppColors.cyan],
           ).createShader(b),
           child: Text(
-            'Crafting Digital Experiences',
+            'Passionate Developer, Real-World Builder',
             style: GoogleFonts.syne(
               fontSize: 26,
               fontWeight: FontWeight.w700,
@@ -2571,38 +2569,178 @@ class _AboutContent extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 22),
-        Text(
-          'Junior Flutter Developer with hands-on experience building scalable, user-centric mobile apps. My Bachelor of Social Work (BSW) background enables me to approach problem-solving with deep empathy, uniquely shaping how I craft human-centric user experiences.',
-          style: GoogleFonts.inter(
-            fontSize: 15,
-            color: AppColors.text1,
-            height: 1.85,
-          ),
+        const SizedBox(height: 32),
+        const _AboutHighlightCard(
+          icon: FontAwesomeIcons.personChalkboard,
+          iconColor: AppColors.cyan,
+          title: "Self-Driven & Passionate",
+          body: "Passionate Flutter Developer driven by a deep love for technology and a commitment to continuous learning — picking up new concepts, tools, and best practices every single day. Transitioned into mobile development through focused self-driven training, channelling genuine curiosity into building real, complete applications from the ground up.",
+          accentColor: AppColors.cyan,
+          index: 0,
         ),
-        const SizedBox(height: 14),
-        Text(
-          'Strong command of Provider state management, Firebase & Supabase integration, and REST API consumption. I translate complex UI/UX designs into responsive, high-performance interfaces with a passion for clean architecture.',
-          style: GoogleFonts.inter(
-            fontSize: 15,
-            color: AppColors.text1,
-            height: 1.85,
-          ),
+        const SizedBox(height: 16),
+        const _AboutHighlightCard(
+          icon: FontAwesomeIcons.layerGroup,
+          iconColor: AppColors.violet,
+          title: "Real-World Applications",
+          body: "Creator of Alizo — a multi-service delivery platform built on Supabase empowering local store owners — and NaDodi, a comprehensive travel booking platform for flights, hotels, packages, and transfers. Every project is production-level, shipped, and complete.",
+          accentColor: AppColors.violet,
+          index: 1,
+        ),
+        const SizedBox(height: 16),
+        const _AboutHighlightCard(
+          icon: FontAwesomeIcons.heartPulse,
+          iconColor: AppColors.pink,
+          title: "Empathy-Driven Engineering",
+          body: "My Bachelor of Social Work (BSW) background gives me a unique perspective — I approach every UI/UX problem with deep human empathy, strong command of Provider, Supabase, Firebase, REST APIs, and a commitment to clean architecture and modular development.",
+          accentColor: AppColors.pink,
+          index: 2,
         ),
         const SizedBox(height: 32),
         Wrap(
           spacing: 14,
           runSpacing: 14,
           children: [
+            _StatCard(number: '2', label: 'Production Apps'),
             _StatCard(number: '3+', label: 'Projects'),
-            _StatCard(number: '1+', label: 'Years Experience'),
+            _StatCard(number: '1', label: 'Years'),
             _StatCard(number: '5+', label: 'Tech Stack'),
           ],
+        ),
+        const SizedBox(height: 32),
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppColors.cyan.withOpacity(0.04),
+            border: const Border(left: BorderSide(color: AppColors.cyan, width: 3)),
+            borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const FaIcon(FontAwesomeIcons.quoteLeft, size: 16, color: AppColors.cyan),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Text(
+                  "Committed to clean architecture, modular development, and growing as a developer with every project built.",
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    color: AppColors.text1,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 48),
         const _GithubContributionsWidget(),
       ],
     );
+  }
+}
+
+class _AboutHighlightCard extends StatefulWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String body;
+  final Color accentColor;
+  final int index;
+  
+  const _AboutHighlightCard({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.body,
+    required this.accentColor,
+    required this.index,
+  });
+
+  @override
+  State<_AboutHighlightCard> createState() => _AboutHighlightCardState();
+}
+
+class _AboutHighlightCardState extends State<_AboutHighlightCard> {
+  bool _hov = false;
+  
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hov = true),
+      onExit: (_) => setState(() => _hov = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 280),
+        transform: _hov ? (Matrix4.identity()..translate(0.0, -5.0)) : Matrix4.identity(),
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.bg2,
+          border: Border.all(
+            color: _hov ? widget.accentColor : AppColors.glassB,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              left: 0,
+              top: 0,
+              bottom: 0,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 280),
+                width: 3,
+                decoration: BoxDecoration(
+                  color: widget.accentColor,
+                  borderRadius: BorderRadius.circular(2),
+                  boxShadow: _hov ? [BoxShadow(color: widget.accentColor, blurRadius: 8)] : null,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 19),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: widget.iconColor.withOpacity(0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: FaIcon(widget.icon, size: 14, color: widget.iconColor),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          widget.title,
+                          style: GoogleFonts.syne(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.text0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    widget.body,
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      color: AppColors.text1,
+                      height: 1.6,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: (150 * widget.index).ms).slideX(begin: -0.1, end: 0);
   }
 }
 
@@ -2988,6 +3126,21 @@ class ProjectsSection extends StatelessWidget {
                 ],
                 githubUrl: 'https://github.com/mhd-dilshad-p',
               ),
+              _FlipProjectCard(
+                title: 'FuelDost',
+                logoAsset: 'assets/images/fuel_dost_logo.png',
+                accentColor: AppColors.cyan,
+                technologies: const ['Flutter', 'Dart', 'Provider', 'Maps APIs'],
+                description:
+                    'A complete fuel price calculation, location-based search, and navigation application. Includes seamless workflow to estimate trip costs, search for nearby stations, and initiate navigation.',
+                features: const [
+                  'Fuel price calculation',
+                  'Location-based search',
+                  'Navigation integration',
+                  'Trip cost estimation',
+                ],
+                githubUrl: 'https://github.com/mhd-dilshad-p/Fuel-Dost',
+              ),
             ],
           ),
         ],
@@ -3161,16 +3314,19 @@ class _CardFront extends StatelessWidget {
                 ],
               ),
               child: ClipOval(
-                child: Image.asset(
-                  logoAsset,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    // Fallback to a default icon if image fails
-                    return Container(
-                      color: accentColor.withOpacity(0.2),
-                      child: Icon(Icons.apps, size: 50, color: accentColor),
-                    );
-                  },
+                child: Container(
+                  color: Colors.white,
+                  child: Image.asset(
+                    logoAsset,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      // Fallback to a default icon if image fails
+                      return Container(
+                        color: accentColor.withOpacity(0.2),
+                        child: Icon(Icons.apps, size: 50, color: accentColor),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -3485,6 +3641,78 @@ class _CardBack extends StatelessWidget {
                 ),
               ),
             ),
+          if (title == 'Nadodi')
+            GestureDetector(
+              onTap: () => showNaDodiDeepDive(context),
+              child: Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.pink.withOpacity(0.6)),
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.pink.withOpacity(0.12),
+                  boxShadow: [
+                    BoxShadow(color: AppColors.pink.withOpacity(0.2), blurRadius: 15),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Deep Dive',
+                      style: GoogleFonts.spaceMono(
+                        fontSize: 13,
+                        color: AppColors.pink,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const FaIcon(
+                      FontAwesomeIcons.arrowRight,
+                      size: 12,
+                      color: AppColors.pink,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          if (title == 'FuelDost')
+            GestureDetector(
+              onTap: () => showFuelDostDeepDive(context),
+              child: Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.cyan.withOpacity(0.6)),
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.cyan.withOpacity(0.12),
+                  boxShadow: [
+                    BoxShadow(color: AppColors.cyan.withOpacity(0.2), blurRadius: 15),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Deep Dive',
+                      style: GoogleFonts.spaceMono(
+                        fontSize: 13,
+                        color: AppColors.cyan,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const FaIcon(
+                      FontAwesomeIcons.arrowRight,
+                      size: 12,
+                      color: AppColors.cyan,
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -3646,7 +3874,7 @@ class _FloatingTechRowState extends State<_FloatingTechRow>
       'icon': FontAwesomeIcons.android,
     },
     {
-      'name': 'Apple',
+      'name': 'IOS',
       'color': const Color.fromARGB(255, 251, 250, 250),
       'assetPath': 'assets/icons/apple.png',
       'icon': FontAwesomeIcons.apple,
@@ -3882,42 +4110,30 @@ class EducationSection extends StatelessWidget {
           const _SectionHeader(
             tag: 'Background',
             title: 'Education & Languages',
+            sub: 'The academic journey and linguistic foundation behind the developer',
           ),
           const SizedBox(height: 64),
-          Wrap(
-            spacing: 28,
-            runSpacing: 28,
-            alignment: WrapAlignment.center,
-            children: [
-              _EduCard(
-                date: '2025',
-                degree: 'Flutter Development Program',
-                school: 'Zoople Technologies, Kerala',
-                color: AppColors.cyan,
-                backgroundImage: 'assets/images/flutterdeveloper.jpeg',
-              ),
-              _EduCard(
-                date: '2022 – 2025',
-                degree: 'Bachelor of Social Work (BSW)',
-                school: 'Calicut University',
-                color: AppColors.text2,
-                backgroundImage: 'assets/images/Social work.jpeg',
-              ),
-              _EduCard(
-                date: '2021 – 2022',
-                degree: 'Higher Secondary (Humanities)',
-                school: 'Kerala State Board',
-                color: AppColors.text1,
-                backgroundImage: 'assets/images/humanities.jpeg',
-              ),
-              _EduCard(
-                date: 'Languages',
-                degree: 'Language Proficiency',
-                school: 'Trilingual Proficiency',
-                color: AppColors.green,
-                languages: const ['English', 'Malayalam', 'Tamil'],
-              ),
-            ],
+          LayoutBuilder(
+            builder: (ctx, cons) {
+              if (cons.maxWidth > 900) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(flex: 6, child: const _EduTimeline()),
+                    const SizedBox(width: 80),
+                    Expanded(flex: 4, child: const _LanguagesAndSkills()),
+                  ],
+                );
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _EduTimeline(),
+                  const SizedBox(height: 64),
+                  const _LanguagesAndSkills(),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -3925,24 +4141,256 @@ class EducationSection extends StatelessWidget {
   }
 }
 
-class _EduCard extends StatefulWidget {
-  final String date, degree, school;
+class _EduTimeline extends StatelessWidget {
+  const _EduTimeline();
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned(
+          left: 6,
+          top: 0,
+          bottom: 0,
+          child: Container(
+            width: 2,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.cyan, AppColors.violet, AppColors.pink],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
+        ),
+        Column(
+          children: const [
+            _EduTimelineCard(
+              date: '2025',
+              degree: 'Flutter Development Program',
+              school: 'Zoople Technologies, Kerala',
+              color: AppColors.cyan,
+              iconBadge: '🎓',
+              description: 'Intensive Flutter development program covering production-level app architecture, state management with Provider, Supabase & Firebase integration, REST API consumption, and real-world project delivery. Built Alizo and NaDodi during this program.',
+              tags: ['Flutter', 'Dart', 'Supabase', 'Firebase', 'Provider'],
+            ),
+            SizedBox(height: 40),
+            _EduTimelineCard(
+              date: '2022 – 2025',
+              degree: 'Bachelor of Social Work (BSW)',
+              school: 'Calicut University, Kerala',
+              color: AppColors.violet,
+              iconBadge: '🏛️',
+              description: 'Three-year undergraduate program in social sciences developing deep empathy, human-centered problem solving, and communication skills — the unique foundation that shapes my user-centric approach to Flutter development.',
+              specialNote: 'This background directly influences how I craft user experiences in every app I build.',
+              tags: ['Human-Centered Design', 'Communication', 'Problem Solving'],
+            ),
+            SizedBox(height: 40),
+            _EduTimelineCard(
+              date: '2021 – 2022',
+              degree: 'Higher Secondary (Humanities)',
+              school: 'Kerala State Board',
+              color: AppColors.pink,
+              iconBadge: '📚',
+              description: 'Humanities stream with a focus on social sciences, building analytical thinking and a strong foundation in understanding human behaviour — skills that translate directly into intuitive UI/UX.',
+              tags: ['Humanities', 'Social Sciences', 'Analytics'],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _EduTimelineCard extends StatefulWidget {
+  final String date, degree, school, iconBadge, description;
+  final String? specialNote;
   final Color color;
-  final List<String>? languages;
-  final String? backgroundImage;
-  const _EduCard({
+  final List<String> tags;
+  const _EduTimelineCard({
     required this.date,
     required this.degree,
     required this.school,
+    required this.iconBadge,
+    required this.description,
     required this.color,
-    this.languages,
-    this.backgroundImage,
+    required this.tags,
+    this.specialNote,
   });
   @override
-  State<_EduCard> createState() => _EduCardState();
+  State<_EduTimelineCard> createState() => _EduTimelineCardState();
 }
 
-class _EduCardState extends State<_EduCard> {
+class _EduTimelineCardState extends State<_EduTimelineCard> {
+  bool _hov = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 48),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            left: -41,
+            top: 4,
+            child: Container(
+              width: 14,
+              height: 14,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: widget.color,
+                border: Border.all(color: AppColors.bg0, width: 3),
+                boxShadow: [
+                  BoxShadow(
+                    color: widget.color.withOpacity(0.7),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          MouseRegion(
+            onEnter: (_) => setState(() => _hov = true),
+            onExit: (_) => setState(() => _hov = false),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 280),
+              transform: _hov ? (Matrix4.identity()..translate(8.0, 0.0)) : Matrix4.identity(),
+              decoration: BoxDecoration(
+                color: AppColors.glass,
+                border: Border.all(color: _hov ? widget.color.withOpacity(0.6) : AppColors.glassB),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: _hov ? [BoxShadow(color: widget.color.withOpacity(0.12), blurRadius: 40)] : null,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(height: 3, color: widget.color),
+                    Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.degree,
+                                      style: GoogleFonts.syne(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.text0),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      widget.school,
+                                      style: GoogleFonts.spaceMono(fontSize: 12, color: widget.color),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bg3,
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: AppColors.glassB),
+                                ),
+                                child: Text(
+                                  widget.date,
+                                  style: GoogleFonts.spaceMono(fontSize: 11, color: AppColors.text2),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            widget.description,
+                            style: GoogleFonts.inter(fontSize: 14, color: AppColors.text1, height: 1.65),
+                          ),
+                          const SizedBox(height: 20),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: widget.tags.map((t) => _SkillChip(label: t, color: widget.color)).toList(),
+                          ),
+                          if (widget.specialNote != null) ...[
+                            const SizedBox(height: 16),
+                            Text(
+                              widget.specialNote!,
+                              style: GoogleFonts.inter(fontSize: 13, color: AppColors.text2, fontStyle: FontStyle.italic),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 24,
+            right: 24,
+            child: Text(widget.iconBadge, style: const TextStyle(fontSize: 24)),
+          ),
+        ],
+      ),
+    ).animate().fadeIn().slideX(begin: -0.08, end: 0);
+  }
+}
+
+class _LanguagesAndSkills extends StatelessWidget {
+  const _LanguagesAndSkills();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'LANGUAGES & SOFT SKILLS',
+          style: GoogleFonts.spaceMono(fontSize: 14, color: AppColors.cyan, letterSpacing: 2),
+        ),
+        const SizedBox(height: 24),
+        const _LanguageCard(flag: '🇬🇧', name: 'English', level: 'Professional', targetPercentage: 0.9, color: AppColors.cyan),
+        const SizedBox(height: 16),
+        const _LanguageCard(flag: '🇮🇳', name: 'Malayalam', level: 'Native', targetPercentage: 1.0, color: AppColors.violet),
+        const SizedBox(height: 16),
+        const _LanguageCard(flag: '🇮🇳', name: 'Tamil', level: 'Conversational', targetPercentage: 0.7, color: AppColors.pink),
+        const SizedBox(height: 40),
+        Text(
+          'CORE STRENGTHS',
+          style: GoogleFonts.spaceMono(fontSize: 11, color: AppColors.cyan, letterSpacing: 2),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: const [
+            _SkillDotChip(label: 'Self-Motivated', color: AppColors.cyan),
+            _SkillDotChip(label: 'Fast Learner', color: AppColors.violet),
+            _SkillDotChip(label: 'Problem Solver', color: AppColors.pink),
+            _SkillDotChip(label: 'Team Player', color: AppColors.green),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _LanguageCard extends StatefulWidget {
+  final String flag, name, level;
+  final double targetPercentage;
+  final Color color;
+  const _LanguageCard({required this.flag, required this.name, required this.level, required this.targetPercentage, required this.color});
+  @override
+  State<_LanguageCard> createState() => _LanguageCardState();
+}
+
+class _LanguageCardState extends State<_LanguageCard> {
   bool _hov = false;
   @override
   Widget build(BuildContext context) {
@@ -3951,141 +4399,99 @@ class _EduCardState extends State<_EduCard> {
       onExit: (_) => setState(() => _hov = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 280),
-        transform: _hov
-            ? (Matrix4.identity()..translate(0.0, -6.0))
-            : Matrix4.identity(),
-        constraints: const BoxConstraints(maxWidth: 310),
+        transform: _hov ? (Matrix4.identity()..translate(0.0, -4.0)) : Matrix4.identity(),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.glass,
-          border: Border.all(
-            color: _hov ? widget.color.withOpacity(0.65) : AppColors.glassB,
-          ),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: _hov
-              ? [
-                  BoxShadow(
-                    color: widget.color.withOpacity(0.18),
-                    blurRadius: 35,
-                  ),
-                ]
-              : null,
+          border: Border.all(color: _hov ? widget.color : AppColors.glassB),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: _hov ? [BoxShadow(color: widget.color.withOpacity(0.15), blurRadius: 20)] : null,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              // Background image
-              if (widget.backgroundImage != null)
-                Positioned.fill(
-                  child: Image.asset(
-                    widget.backgroundImage!,
-                    fit: BoxFit.cover,
-                    opacity: AlwaysStoppedAnimation(_hov ? 0.5 : 0.35),
-                    errorBuilder: (context, error, stackTrace) {
-                      return const SizedBox.shrink();
-                    },
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(widget.flag, style: const TextStyle(fontSize: 24)),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Text(
+                    widget.name,
+                    style: GoogleFonts.syne(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.text0),
                   ),
                 ),
-              // Gradient overlay for better text readability
-              if (widget.backgroundImage != null)
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.bg2.withOpacity(0.55),
-                          AppColors.bg1.withOpacity(0.35),
-                        ],
-                      ),
-                    ),
-                  ),
+                Text(
+                  widget.level,
+                  style: GoogleFonts.spaceMono(fontSize: 11, color: AppColors.text2),
                 ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Accent top bar
-                  Container(
-                    height: 3,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [widget.color, widget.color.withOpacity(0.2)],
+              ],
+            ),
+            const SizedBox(height: 14),
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: widget.targetPercentage),
+              duration: const Duration(milliseconds: 1200),
+              curve: Curves.easeOutCubic,
+              builder: (context, val, _) {
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Container(
+                      height: 4,
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: AppColors.bg3, borderRadius: BorderRadius.circular(2)),
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        height: 4,
+                        width: constraints.maxWidth * val,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          gradient: LinearGradient(colors: [widget.color, widget.color.withOpacity(0.5)]),
+                          boxShadow: [BoxShadow(color: widget.color.withOpacity(0.6), blurRadius: 6)],
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(28),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.date,
-                          style: GoogleFonts.spaceMono(
-                            fontSize: 12,
-                            color: AppColors.text1,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          widget.degree,
-                          style: GoogleFonts.syne(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.text0,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          widget.school,
-                          style: GoogleFonts.inter(
-                            fontSize: 13,
-                            color: AppColors.text1,
-                          ),
-                        ),
-                        if (widget.languages != null) ...[
-                          const SizedBox(height: 18),
-                          Wrap(
-                            spacing: 8,
-                            children: widget.languages!
-                                .map(
-                                  (l) => Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 5,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.bg3,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: AppColors.glassB,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      l,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 12,
-                                        color: AppColors.text1,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
-    ).animate().fadeIn().slideY(begin: 0.2, end: 0);
+    );
+  }
+}
+
+class _SkillDotChip extends StatelessWidget {
+  final String label;
+  final Color color;
+  const _SkillDotChip({required this.label, required this.color});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.bg3,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.glassB),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: color,
+              boxShadow: [BoxShadow(color: color, blurRadius: 4)],
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            label,
+            style: GoogleFonts.inter(fontSize: 12, color: AppColors.text1),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -4977,9 +5383,10 @@ class _HeroDownloadCVBtn extends StatefulWidget {
 class _HeroDownloadCVBtnState extends State<_HeroDownloadCVBtn> {
   bool _hov = false;
 
-  void _downloadCV() async {
-    final uri = Uri.parse('assets/cv/Mohammed_Dilshad_P.pdf');
-    if (await canLaunchUrl(uri)) await launchUrl(uri);
+  void _downloadCV() {
+    html.AnchorElement(href: 'assets/assets/cv/mohammed_dilshad_p.pdf')
+      ..setAttribute('download', 'mohammed_dilshad_p.pdf')
+      ..click();
   }
 
   @override
@@ -5375,19 +5782,14 @@ class _AlizoDeepDiveModal extends StatelessWidget {
                     const SizedBox(height: 24),
                     LayoutBuilder(builder: (context, constraints) {
                       final width = constraints.maxWidth;
-                      final count = width > 600 ? 2 : 1;
-                      return GridView.count(
-                        crossAxisCount: count,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        childAspectRatio: count == 2 ? 3 : 4,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        children: const [
-                          _RoleCard(icon: '🛍️', title: 'Customer App', desc: 'Browse stores, multi-store checkout, order tracking'),
-                          _RoleCard(icon: '🏪', title: 'Vendor App', desc: 'Manage catalogue, real-time orders, analytics'),
-                          _RoleCard(icon: '🚴', title: 'Rider App', desc: 'Multi-order delivery, navigation, earnings'),
-                          _RoleCard(icon: '🖥️', title: 'Admin Dashboard', desc: 'User management, approvals, analytics (Vercel)'),
+                      return Wrap(
+                        spacing: 16,
+                        runSpacing: 16,
+                        children: [
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🛍️', title: 'Customer App', desc: 'Browse stores, multi-store checkout, order tracking')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🏪', title: 'Vendor App', desc: 'Manage catalogue, real-time orders, analytics')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🚴', title: 'Rider App', desc: 'Multi-order delivery, navigation, earnings')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🖥️', title: 'Admin Dashboard', desc: 'User management, approvals, analytics (Vercel)')),
                         ],
                       );
                     }),
@@ -5397,24 +5799,21 @@ class _AlizoDeepDiveModal extends StatelessWidget {
                     const SizedBox(height: 24),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(32),
+                      padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(color: AppColors.glass, borderRadius: BorderRadius.circular(16)),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8,
+                            runSpacing: 12,
                             children: const [
-                              Expanded(child: _Block('Customer App')),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Icon(Icons.arrow_forward, color: AppColors.violet),
-                              ),
-                              Expanded(child: _Block('Supabase API', primary: true)),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Icon(Icons.arrow_back, color: AppColors.violet),
-                              ),
-                              Expanded(child: _Block('Vendor App')),
+                              _Block('Customer App'),
+                              Icon(Icons.arrow_forward, color: AppColors.violet),
+                              _Block('Supabase API', primary: true),
+                              Icon(Icons.arrow_back, color: AppColors.violet),
+                              _Block('Vendor App'),
                             ],
                           ),
                           const Padding(
@@ -5426,15 +5825,15 @@ class _AlizoDeepDiveModal extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 16),
                             child: Icon(Icons.swap_vert, color: AppColors.violet),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8,
+                            runSpacing: 12,
                             children: const [
-                              Expanded(child: _Block('Rider App')),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Icon(Icons.arrow_forward, color: AppColors.violet),
-                              ),
-                              Expanded(child: _Block('OneSignal')),
+                              _Block('Rider App'),
+                              Icon(Icons.arrow_forward, color: AppColors.violet),
+                              _Block('OneSignal'),
                             ],
                           ),
                         ],
@@ -5452,6 +5851,22 @@ class _AlizoDeepDiveModal extends StatelessWidget {
                         SizedBox(height: 16),
                         _TechCard(title: 'Auth Pipeline', desc: 'Google OAuth via Firebase credentials bridged to Supabase JWTs for seamless cross-platform single sign-on.'),
                       ],
+                    ),
+                    const SizedBox(height: 48),
+                    // App Screens Gallery
+                    Text('App Screens', style: GoogleFonts.spaceMono(fontSize: 14, color: AppColors.cyan, letterSpacing: 2)),
+                    const SizedBox(height: 24),
+                    const SizedBox(
+                      height: 400,
+                      child: _AppScreensGallery(
+                        imagePaths: const [
+                          'assets/screenshots/Alizo/splash.jpeg',
+                          'assets/screenshots/Alizo/homeincustomer.jpeg',
+                        ],
+                        accentColor: AppColors.cyan,
+                        placeholderLabels: const ['Splash', 'Home'],
+                        placeholderEmojis: const ['✨', '🏠'],
+                      ),
                     ),
                   ],
                 ),
@@ -5537,3 +5952,900 @@ class _TechCard extends StatelessWidget {
     );
   }
 }
+
+// ══════════════════════════════════════════════
+// NADODI DEEP DIVE MODAL
+// ══════════════════════════════════════════════
+void showNaDodiDeepDive(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return const _NaDodiDeepDiveModal();
+    },
+    transitionBuilder: (context, animation, secondaryAnimation, child) {
+      return Transform.scale(
+        scale: 0.9 + 0.1 * animation.value,
+        child: Opacity(
+          opacity: animation.value,
+          child: child,
+        ),
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 400),
+  );
+}
+
+class _NaDodiDeepDiveModal extends StatelessWidget {
+  const _NaDodiDeepDiveModal();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.bg0.withOpacity(0.95),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: const SizedBox(),
+            ),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 800),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.bg2,
+                          ),
+                          child: const Icon(Icons.flight_takeoff, color: AppColors.pink, size: 36),
+                        ),
+                        const SizedBox(width: 24),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('NaDodi Travel Platform', style: GoogleFonts.syne(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: ['Flutter', 'Firebase', 'REST API', 'JS Backend', 'Admin Web']
+                                    .map((t) => Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(color: AppColors.pink.withOpacity(0.15), borderRadius: BorderRadius.circular(12)),
+                                          child: Text(t, style: GoogleFonts.spaceMono(fontSize: 10, color: AppColors.pink)),
+                                        ))
+                                    .toList(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: const BoxDecoration(color: AppColors.glass, shape: BoxShape.circle),
+                            child: const Icon(Icons.close, color: AppColors.text1),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 48),
+                    // Feature Cards
+                    Text('Core Features', style: GoogleFonts.syne(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.pink)),
+                    const SizedBox(height: 24),
+                    LayoutBuilder(builder: (context, constraints) {
+                      final width = constraints.maxWidth;
+                      return Wrap(
+                        spacing: 16,
+                        runSpacing: 16,
+                        children: [
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '✈️', title: 'Flight Booking', desc: 'Search and book flights with real-time availability')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🏨', title: 'Hotel Booking', desc: 'Browse and reserve hotels with detailed listings')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🚕', title: 'Cab Transfers', desc: 'Book cab transfers between locations seamlessly')),
+                          FractionallySizedBox(widthFactor: width > 600 ? 0.48 : 1.0, child: const _RoleCard(icon: '🗺️', title: 'Tour Packages', desc: 'Curated tour packages with complete itinerary details')),
+                        ],
+                      );
+                    }),
+                    const SizedBox(height: 48),
+                    // Architecture Diagram
+                    Text('Architecture', style: GoogleFonts.syne(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.pink)),
+                    const SizedBox(height: 24),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(color: AppColors.glass, borderRadius: BorderRadius.circular(16)),
+                      child: Column(
+                        children: [
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8,
+                            runSpacing: 12,
+                            children: const [
+                              _Block('Flutter App'),
+                              Icon(Icons.arrow_forward, color: AppColors.pink),
+                              _Block('Firebase Auth'),
+                              Icon(Icons.arrow_forward, color: AppColors.pink),
+                              _Block('Firestore', primary: true),
+                            ],
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Icon(Icons.swap_vert, color: AppColors.pink),
+                          ),
+                          const _Block('JS Backend API', primary: true),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Icon(Icons.swap_vert, color: AppColors.pink),
+                          ),
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8,
+                            runSpacing: 12,
+                            children: const [
+                              _Block('Admin Dashboard (Web)'),
+                              Icon(Icons.arrow_back, color: AppColors.pink),
+                              _Block('REST API Layer'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 48),
+                    // Technical Decisions
+                    Text('Key Technical Decisions', style: GoogleFonts.syne(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.pink)),
+                    const SizedBox(height: 24),
+                    Column(
+                      children: const [
+                        _TechCard(title: 'QR System', desc: 'QR code generation for booking verification and mobile scanner integration for instant ticket validation.'),
+                        SizedBox(height: 16),
+                        _TechCard(title: 'PDF Engine', desc: 'PDF generation and printing for travel tickets and booking confirmations using the pdf & printing packages, with in-app sharing via share_plus.'),
+                        SizedBox(height: 16),
+                        _TechCard(title: 'Backend Ecosystem', desc: 'Custom JavaScript backend connecting Flutter mobile app and web admin dashboard to shared data services securely.'),
+                      ],
+                    ),
+                    const SizedBox(height: 48),
+                    // App Screens Gallery
+                    Text('App Screens', style: GoogleFonts.spaceMono(fontSize: 14, color: AppColors.pink, letterSpacing: 2)),
+                    const SizedBox(height: 24),
+                    const SizedBox(
+                      height: 400,
+                      child: _AppScreensGallery(
+                        imagePaths: const [
+                          'assets/screenshots/Nadodi/splashnadodi.jpeg',
+                          'assets/screenshots/Nadodi/nadodihome.jpeg',
+                          'assets/screenshots/Nadodi/flightbooking.jpeg',
+                        ],
+                        accentColor: AppColors.pink,
+                        placeholderLabels: const ['Splash', 'Home', 'Flight Booking'],
+                        placeholderEmojis: const ['✈️', '🏠', '✈️'],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void showFuelDostDeepDive(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return const _FuelDostDeepDiveModal();
+    },
+    transitionBuilder: (context, animation, secondaryAnimation, child) {
+      return Transform.scale(
+        scale: 0.9 + 0.1 * animation.value,
+        child: Opacity(
+          opacity: animation.value,
+          child: child,
+        ),
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 400),
+  );
+}
+
+class _FuelDostDeepDiveModal extends StatelessWidget {
+  const _FuelDostDeepDiveModal();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.bg0.withOpacity(0.95),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: const SizedBox(),
+            ),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 800),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // ── Header ──────────────────────────────────────
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: ClipOval(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                'assets/images/fuel_dost_logo.png',
+                                fit: BoxFit.contain,
+                                errorBuilder: (_, __, ___) => const Icon(
+                                    Icons.local_gas_station,
+                                    color: AppColors.cyan,
+                                    size: 36),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('FuelDost',
+                                  style: GoogleFonts.syne(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Smart Fuel Cost Optimization App',
+                                style: GoogleFonts.inter(
+                                    fontSize: 14, color: AppColors.text1),
+                              ),
+                              const SizedBox(height: 10),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  'Flutter',
+                                  'Dart',
+                                  'OpenStreetMap',
+                                  'OpenRouteService',
+                                  'Hive',
+                                  'Overpass API',
+                                  'Provider',
+                                ]
+                                    .map((t) => Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.cyan
+                                                  .withOpacity(0.15),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          child: Text(t,
+                                              style: GoogleFonts.spaceMono(
+                                                  fontSize: 10,
+                                                  color: AppColors.cyan)),
+                                        ))
+                                    .toList(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: const BoxDecoration(
+                                color: AppColors.glass,
+                                shape: BoxShape.circle),
+                            child:
+                                const Icon(Icons.close, color: AppColors.text1),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 40),
+
+                    // ── Overview ─────────────────────────────────────
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: AppColors.cyan.withOpacity(0.05),
+                        border: const Border(
+                            left: BorderSide(color: AppColors.cyan, width: 3)),
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(12),
+                            bottomRight: Radius.circular(12)),
+                      ),
+                      child: Text(
+                        'FuelDost is a smart Flutter-based fuel cost optimization app that combines map-based route calculation, real-time fuel pricing with manual override, petrol/diesel selection, and vehicle mileage configuration (bike/car) to accurately estimate trip costs — with offline support and a premium animated UI.',
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            color: AppColors.text1,
+                            height: 1.7),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+
+                    // ── Core Features ────────────────────────────────
+                    Text('Core Features',
+                        style: GoogleFonts.syne(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.cyan)),
+                    const SizedBox(height: 20),
+                    LayoutBuilder(builder: (context, constraints) {
+                      final wide = constraints.maxWidth > 560;
+                      return Wrap(
+                        spacing: 16,
+                        runSpacing: 16,
+                        children: [
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '🗺️',
+                                  title: 'Map-Based Route Calc',
+                                  desc:
+                                      'OpenStreetMap + OpenRouteService for live route distance computation')),
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '⛽',
+                                  title: 'Real-Time Fuel Pricing',
+                                  desc:
+                                      'Live price fetch with manual override for petrol & diesel')),
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '🏍️',
+                                  title: 'Vehicle Mileage Config',
+                                  desc:
+                                      'Bike / Car presets with custom mileage for accurate cost estimation')),
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '📍',
+                                  title: 'Nearby Pump Discovery',
+                                  desc:
+                                      'Overpass API integration to find closest fuel stations on the map')),
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '📊',
+                                  title: 'Expense Tracking',
+                                  desc:
+                                      'Hive-powered local storage for trip history and spend insights')),
+                          FractionallySizedBox(
+                              widthFactor: wide ? 0.48 : 1.0,
+                              child: const _RoleCard(
+                                  icon: '📐',
+                                  title: 'Multiple Distance Inputs',
+                                  desc:
+                                      'Enter via map tap, manual input, or link to external navigation apps')),
+                        ],
+                      );
+                    }),
+                    const SizedBox(height: 40),
+
+                    // ── Tech Decisions ────────────────────────────────
+                    Text('Key Technical Decisions',
+                        style: GoogleFonts.syne(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.cyan)),
+                    const SizedBox(height: 20),
+                    Column(
+                      children: const [
+                        _TechCard(
+                            title: 'OpenStreetMap + OpenRouteService',
+                            desc:
+                                'Free, open-source map stack for routing without Google Maps API cost — giving full offline tile support and accurate road-level distance.'),
+                        SizedBox(height: 16),
+                        _TechCard(
+                            title: 'Hive for Offline Expense Tracking',
+                            desc:
+                                'Lightweight key-value store for fast, on-device persistence of trip history, fuel prices, and user settings — no internet required.'),
+                        SizedBox(height: 16),
+                        _TechCard(
+                            title: 'Overpass API for POI Search',
+                            desc:
+                                'Query live OpenStreetMap data to discover nearby fuel pumps dynamically, displayed directly on the in-app map layer.'),
+                        SizedBox(height: 16),
+                        _TechCard(
+                            title: 'Provider State Management',
+                            desc:
+                                'Clean separation of UI and business logic using Provider for predictable, testable app state across fuel calculation flows.'),
+                      ],
+                    ),
+                    const SizedBox(height: 40),
+
+                    // ── App Screens ───────────────────────────────────
+                    Text('App Screens',
+                        style: GoogleFonts.spaceMono(
+                            fontSize: 14,
+                            color: AppColors.cyan,
+                            letterSpacing: 2)),
+                    const SizedBox(height: 24),
+                    const SizedBox(
+                      height: 420,
+                      child: _AppScreensGallery(
+                        imagePaths: const [
+                          'assets/screenshots/FuelDost/home1.jpeg',
+                          'assets/screenshots/FuelDost/home2.jpeg',
+                          'assets/screenshots/FuelDost/insights.jpeg',
+                          'assets/screenshots/FuelDost/expenceandhistory.jpeg',
+                        ],
+                        accentColor: AppColors.cyan,
+                        placeholderLabels: const [
+                          'Home',
+                          'Map Search',
+                          'Insights',
+                          'History'
+                        ],
+                        placeholderEmojis: const ['🏠', '🗺️', '📈', '📜'],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ══════════════════════════════════════════════
+// APP SCREENS GALLERY
+// ══════════════════════════════════════════════
+class _AppScreensGallery extends StatefulWidget {
+  final List<String> imagePaths;
+  final Color accentColor;
+  final List<String> placeholderLabels;
+  final List<String> placeholderEmojis;
+
+  const _AppScreensGallery({
+    required this.imagePaths,
+    required this.accentColor,
+    required this.placeholderLabels,
+    required this.placeholderEmojis,
+  });
+
+  @override
+  State<_AppScreensGallery> createState() => _AppScreensGalleryState();
+}
+
+class _AppScreensGalleryState extends State<_AppScreensGallery> {
+  late PageController _pageController;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.85);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _nextPage() {
+    if (_currentIndex < widget.imagePaths.length - 1) {
+      _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  void _prevPage() {
+    if (_currentIndex > 0) {
+      _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              PageView.builder(
+                controller: _pageController,
+                onPageChanged: (index) => setState(() => _currentIndex = index),
+                itemCount: widget.imagePaths.length,
+                itemBuilder: (context, index) {
+                  return AnimatedBuilder(
+                    animation: _pageController,
+                    builder: (context, child) {
+                      double value = 1.0;
+                      if (_pageController.position.haveDimensions) {
+                        value = _pageController.page! - index;
+                        value = (1 - (value.abs() * 0.15)).clamp(0.0, 1.0);
+                      }
+                      return Center(
+                        child: Transform.scale(
+                          scale: value,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  opaque: false,
+                                  pageBuilder: (BuildContext context, _, __) {
+                                    return _FullScreenImageModal(
+                                      imagePaths: widget.imagePaths,
+                                      initialIndex: index,
+                                      accentColor: widget.accentColor,
+                                      placeholderEmojis: widget.placeholderEmojis,
+                                      placeholderLabels: widget.placeholderLabels,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: Hero(
+                              tag: widget.imagePaths[index],
+                              child: Container(
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: AppColors.bg3,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(color: widget.accentColor.withOpacity(0.4), width: 1.5),
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 5))
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    widget.imagePaths[index],
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return _PlaceholderScreenshot(
+                                        label: widget.placeholderLabels[index],
+                                        emoji: widget.placeholderEmojis[index],
+                                        accentColor: widget.accentColor,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              if (widget.imagePaths.length > 1) ...[
+                Positioned(
+                  left: 10,
+                  child: AnimatedOpacity(
+                    opacity: _currentIndex == 0 ? 0.4 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: GestureDetector(
+                      onTap: _prevPage,
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.glass,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: widget.accentColor.withOpacity(0.6)),
+                        ),
+                        child: const Icon(Icons.chevron_left, color: AppColors.text0),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 10,
+                  child: AnimatedOpacity(
+                    opacity: _currentIndex == widget.imagePaths.length - 1 ? 0.4 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: GestureDetector(
+                      onTap: _nextPage,
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.glass,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: widget.accentColor.withOpacity(0.6)),
+                        ),
+                        child: const Icon(Icons.chevron_right, color: AppColors.text0),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            widget.imagePaths.length,
+            (index) => AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              width: _currentIndex == index ? 24 : 8,
+              height: 8,
+              decoration: BoxDecoration(
+                color: _currentIndex == index ? widget.accentColor : AppColors.bg3,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PlaceholderScreenshot extends StatelessWidget {
+  final String label;
+  final String emoji;
+  final Color accentColor;
+  const _PlaceholderScreenshot({required this.label, required this.emoji, required this.accentColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return CustomPaint(
+          painter: _DashedBorderPainter(color: accentColor.withOpacity(0.5)),
+          child: Container(
+            color: AppColors.bg3,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(emoji, style: const TextStyle(fontSize: 32)),
+                  const SizedBox(height: 16),
+                  Text(label, style: GoogleFonts.syne(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.text0)),
+                  const SizedBox(height: 8),
+                  Text('Screenshot\ncoming soon', textAlign: TextAlign.center, style: GoogleFonts.spaceMono(fontSize: 10, color: AppColors.text2)),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    );
+  }
+}
+
+class _DashedBorderPainter extends CustomPainter {
+  final Color color;
+  _DashedBorderPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke;
+    
+    double dashWidth = 8, dashSpace = 6, startX = 0;
+    while (startX < size.width) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      startX += dashWidth + dashSpace;
+    }
+    double startY = 0;
+    while (startY < size.height) {
+      canvas.drawLine(Offset(size.width, startY), Offset(size.width, startY + dashWidth), paint);
+      startY += dashWidth + dashSpace;
+    }
+    startX = size.width;
+    while (startX > 0) {
+      canvas.drawLine(Offset(startX, size.height), Offset(startX - dashWidth, size.height), paint);
+      startX -= dashWidth + dashSpace;
+    }
+    startY = size.height;
+    while (startY > 0) {
+      canvas.drawLine(Offset(0, startY), Offset(0, startY - dashWidth), paint);
+      startY -= dashWidth + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+class _FullScreenImageModal extends StatefulWidget {
+  final List<String> imagePaths;
+  final int initialIndex;
+  final Color accentColor;
+  final List<String> placeholderEmojis;
+  final List<String> placeholderLabels;
+
+  const _FullScreenImageModal({required this.imagePaths, required this.initialIndex, required this.accentColor, required this.placeholderEmojis, required this.placeholderLabels});
+
+  @override
+  State<_FullScreenImageModal> createState() => _FullScreenImageModalState();
+}
+
+class _FullScreenImageModalState extends State<_FullScreenImageModal> {
+  late PageController _pageController;
+  late int _currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+    _pageController = PageController(initialPage: widget.initialIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _nextPage() {
+    if (_currentIndex < widget.imagePaths.length - 1) {
+      _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  void _prevPage() {
+    if (_currentIndex > 0) {
+      _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.bg0.withOpacity(0.95),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: const SizedBox(),
+            ),
+          ),
+          Center(
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) => setState(() => _currentIndex = index),
+              itemCount: widget.imagePaths.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+                  child: Hero(
+                    tag: widget.imagePaths[index],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: Image.asset(
+                        widget.imagePaths[index],
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return _PlaceholderScreenshot(
+                            label: widget.placeholderLabels[index],
+                            emoji: widget.placeholderEmojis[index],
+                            accentColor: widget.accentColor,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Positioned(
+            top: 40,
+            right: 24,
+            child: IconButton(
+              icon: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(color: AppColors.glass, shape: BoxShape.circle),
+                child: const Icon(Icons.close, color: Colors.white),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          if (widget.imagePaths.length > 1) ...[
+            Positioned(
+              left: 24,
+              top: MediaQuery.of(context).size.height / 2 - 24,
+              child: AnimatedOpacity(
+                opacity: _currentIndex == 0 ? 0.4 : 1.0,
+                duration: const Duration(milliseconds: 200),
+                child: GestureDetector(
+                  onTap: _prevPage,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.glass,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: widget.accentColor.withOpacity(0.6)),
+                    ),
+                    child: const Icon(Icons.chevron_left, color: Colors.white, size: 28),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              right: 24,
+              top: MediaQuery.of(context).size.height / 2 - 24,
+              child: AnimatedOpacity(
+                opacity: _currentIndex == widget.imagePaths.length - 1 ? 0.4 : 1.0,
+                duration: const Duration(milliseconds: 200),
+                child: GestureDetector(
+                  onTap: _nextPage,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.glass,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: widget.accentColor.withOpacity(0.6)),
+                    ),
+                    child: const Icon(Icons.chevron_right, color: Colors.white, size: 28),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 40,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColors.glass,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: widget.accentColor.withOpacity(0.4)),
+                  ),
+                  child: Text(
+                    '${_currentIndex + 1} / ${widget.imagePaths.length}',
+                    style: GoogleFonts.spaceMono(fontSize: 14, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
